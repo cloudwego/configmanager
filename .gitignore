@@ -28,3 +28,6 @@ output/*
 # Vscode files
 .vscode
 
+# Example temp files
+example/example
+example/local_dump.json

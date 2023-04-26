@@ -1,0 +1,7 @@
+{
+  "test1": {
+    "item-max-retry": 1,
+    "item-max-limit": 9223372036854775807,
+    "item-service-name": "service_name"
+  }
+}
