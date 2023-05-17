@@ -184,7 +184,7 @@ func TestConfigValueImpl_MarshalJSON(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewConfigValueImpl(tt.fields.items)
-			got, err := sonic.ConfigDefault.Marshal(c)
+			got, err := sonic.ConfigStd.Marshal(c)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("MarshalJSON() error = %v, wantErr %v", err, tt.wantErr)
 				return

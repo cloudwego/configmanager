@@ -24,6 +24,7 @@ import (
 
 var counter int64 = 0
 
+// sonicAPI is used for **decoding** json with UseNumber option.
 var sonicAPI = sonic.Config{UseNumber: true}.Froze()
 
 // IncreaseCounter increases the counter by 1 and returns the new value.
@@ -101,7 +102,7 @@ type configSerializerJSON struct{}
 // Encode serializes a map of configurations into JSON format.
 // It returns a byte slice containing the encoded data and an error if it fails to encode.
 func (s *configSerializerJSON) Encode(config map[string]iface.ConfigValue) ([]byte, error) {
-	return sonicAPI.Marshal(config)
+	return sonic.ConfigStd.MarshalIndent(config, "", "\t")
 }
 
 // JsonDecodeWithNumber decodes a JSON byte slice with the option to parse numbers as json.Number type.
@@ -113,7 +114,7 @@ func JsonDecodeWithNumber(b []byte, v interface{}) error {
 // MustJsonMarshal marshals the given interface into a JSON string.
 // If the operation fails, it panics.
 func MustJsonMarshal(v interface{}) []byte {
-	data, err := sonicAPI.Marshal(v)
+	data, err := sonic.ConfigStd.Marshal(v)
 	if err != nil {
 		panic(err)
 	}
