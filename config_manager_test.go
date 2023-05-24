@@ -870,7 +870,10 @@ func TestConfigManager_Dump(t *testing.T) {
 				filepath: "dump_test2.json",
 			},
 			wantErr: false,
-			want:    string(util.MustJsonMarshal(map[string]interface{}{"key": defaultConfig})),
+			want: func() string {
+				s, _ := util.JSONSerializer.Encode(map[string]iface.ConfigValue{"key": defaultConfig})
+				return string(s)
+			}(),
 		},
 		{
 			name: "dump_fail",

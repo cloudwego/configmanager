@@ -126,5 +126,5 @@ func (c *ConfigValueImpl) SetItem(itemType iface.ItemType, item iface.ConfigValu
 func (c *ConfigValueImpl) MarshalJSON() ([]byte, error) {
 	c.lock.RLock()
 	defer c.lock.RUnlock()
-	return sonic.ConfigDefault.MarshalIndent(c.items, "", "\t")
+	return sonic.ConfigStd.MarshalIndent(c.items, "", "\t")
 }
