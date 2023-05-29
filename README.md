@@ -113,7 +113,7 @@ manager.RefreshAndWait()
 Access and retrieve configuration using the provided methods:
 ```
 // define your iface.ConfigKey with a ToString() method
-configKey := NewYourConfigKey(...)
+configKey := "SomeConfigKey"
 
 // it's recommended to retrieve the ConfigValueItem directly:
 maxRetryItem, err := manager.GetConfigItem(configKey, TypeItemMaxRetry)

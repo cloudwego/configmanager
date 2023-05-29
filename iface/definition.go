@@ -38,11 +38,6 @@ var (
 // LogFunc is used to decouple config manager with logger implementations
 type LogFunc func(format string, args ...interface{})
 
-// ConfigKey defines the key of a config, and is assumed to be associated with a service.
-type ConfigKey interface {
-	ToString() string
-}
-
 // ConfigValue is business related, and config manager don't care about its content.
 type ConfigValue interface {
 	DeepCopy() ConfigValue
@@ -93,8 +88,8 @@ type ConfigManagerIface interface {
 	DeregisterConfigChangeListener(identifier string)
 	Refresh() RefreshCompleteSignal
 	RefreshAndWait() error
-	GetConfig(key ConfigKey) (ConfigValue, error)
-	GetConfigItem(key ConfigKey, itemType ItemType) (ConfigValueItem, error)
+	GetConfig(key string) (ConfigValue, error)
+	GetConfigItem(key string, itemType ItemType) (ConfigValueItem, error)
 	GetAllConfig() map[string]ConfigValue
 	Dump(filepath string) error
 }

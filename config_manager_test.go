@@ -32,15 +32,6 @@ import (
 	"github.com/cloudwego/configmanager/util"
 )
 
-type ConfigKeyUT struct {
-	service string
-	method  string
-}
-
-func (k *ConfigKeyUT) ToString() string {
-	return k.service + "|" + k.method
-}
-
 const itemTypeTest iface.ItemType = "item-test"
 
 var (
@@ -55,15 +46,8 @@ var (
 		"service2|method4": defaultConfig.DeepCopy(),
 	}
 
-	existKey = &ConfigKeyUT{
-		service: "service1",
-		method:  "method1",
-	}
-
-	notExistKey = &ConfigKeyUT{
-		service: "service3",
-		method:  "method5",
-	}
+	existKey    = "service1|method1"
+	notExistKey = "service3|method5"
 
 	sampleConfig = func() iface.ConfigValue {
 		value := defaultConfig.DeepCopy()
@@ -116,7 +100,7 @@ func TestConfigManager_GetConfig(t *testing.T) {
 		currentConfig *sync.Map
 	}
 	type args struct {
-		key iface.ConfigKey
+		key string
 	}
 
 	tests := []struct {
@@ -142,14 +126,14 @@ func TestConfigManager_GetConfig(t *testing.T) {
 			fields: fields{
 				currentConfig: func() *sync.Map {
 					m := &sync.Map{}
-					m.Store(existKey.ToString(), defaultCurrentConfig[existKey.ToString()])
+					m.Store(existKey, defaultCurrentConfig[existKey])
 					return m
 				}(),
 			},
 			args: args{
 				key: existKey,
 			},
-			want:    defaultCurrentConfig[existKey.ToString()],
+			want:    defaultCurrentConfig[existKey],
 			wantErr: nil,
 		},
 	}
@@ -180,7 +164,7 @@ func TestConfigManager_GetConfig(t *testing.T) {
 		m := &ConfigManager{
 			currentConfig: func() *sync.Map {
 				m := &sync.Map{}
-				m.Store(existKey.ToString(), "Value")
+				m.Store(existKey, "Value")
 				return m
 			}(),
 		}
@@ -989,7 +973,7 @@ func TestConfigManager_GetConfigItem(t *testing.T) {
 		currentConfig *sync.Map
 	}
 	type args struct {
-		key      iface.ConfigKey
+		key      string
 		itemType iface.ItemType
 	}
 	tests := []struct {
@@ -1005,10 +989,7 @@ func TestConfigManager_GetConfigItem(t *testing.T) {
 				currentConfig: &sync.Map{},
 			},
 			args: args{
-				key: &ConfigKeyUT{
-					service: "service1",
-					method:  "method1",
-				},
+				key:      "service1|method1",
 				itemType: itemTypeTest,
 			},
 			want:    nil,
