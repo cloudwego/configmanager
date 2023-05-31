@@ -25,25 +25,6 @@ import (
 	"github.com/cloudwego/configmanager/util"
 )
 
-var _ iface.ConfigKey = (*YourConfigKey)(nil)
-
-// YourConfigKey is an example of a custom ConfigKey
-type YourConfigKey struct {
-	Service string
-}
-
-// ToString returns the string representation of the YourConfigKey instance
-func (k *YourConfigKey) ToString() string {
-	return k.Service
-}
-
-// NewYourConfigKey returns a new YourConfigKey
-func NewYourConfigKey(s string) iface.ConfigKey {
-	return &YourConfigKey{
-		Service: s,
-	}
-}
-
 func main() {
 	// define your own item type
 	const TypeItemMaxRetry iface.ItemType = "item-max-retry"
@@ -74,7 +55,7 @@ func main() {
 
 	manager.RefreshAndWait()
 
-	configKey := NewYourConfigKey("test1")
+	configKey := "test1"
 
 	// it's recommended to retrieve the ConfigValueItem directly:
 	maxRetryItem, err := manager.GetConfigItem(configKey, TypeItemMaxRetry)

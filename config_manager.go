@@ -348,19 +348,19 @@ func (m *ConfigManager) callConfigChangeListeners(differences []iface.ConfigChan
 // GetConfig retrieves the configuration value for the given key from the ConfigManager.
 // If the key is not found, it returns an error indicating the key was not found.
 // If the value of the key is not of type ConfigValue, it panics with an error message.
-func (m *ConfigManager) GetConfig(key iface.ConfigKey) (iface.ConfigValue, error) {
-	if value, ok := m.getCurrentConfigAtomic().Load(key.ToString()); ok {
+func (m *ConfigManager) GetConfig(key string) (iface.ConfigValue, error) {
+	if value, ok := m.getCurrentConfigAtomic().Load(key); ok {
 		if configValue, ok := value.(iface.ConfigValue); ok {
 			return configValue, nil
 		}
-		panic(fmt.Sprintf("GetConfigValue: invalid config Value type for %v", key.ToString())) // should not happen, fail fast
+		panic(fmt.Sprintf("GetConfigValue: invalid config Value type for %v", key)) // should not happen, fail fast
 	}
 	return nil, iface.ErrConfigNotFound
 }
 
 // GetConfigItem retrieves a specific value from the configuration based on the given key and item type.
 // Returns the retrieved configuration value item and an error if unable to retrieve it.
-func (m *ConfigManager) GetConfigItem(key iface.ConfigKey, itemType iface.ItemType) (iface.ConfigValueItem, error) {
+func (m *ConfigManager) GetConfigItem(key string, itemType iface.ItemType) (iface.ConfigValueItem, error) {
 	configValue, err := m.GetConfig(key)
 	if err != nil {
 		return nil, err
