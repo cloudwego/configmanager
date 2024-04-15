@@ -16,6 +16,6 @@ package configmanager
 
 const (
 	Name    = "ConfigManager"
-	Version = "v0.1.0"
+	Version = "v0.2.1"
 	Home    = "https://github.com/cloudwego/configmanager"
 )
