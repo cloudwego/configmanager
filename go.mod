@@ -2,4 +2,4 @@ module github.com/cloudwego/configmanager
 
 go 1.15
 
-require github.com/bytedance/sonic v1.11.5
+require github.com/bytedance/sonic v1.11.6
