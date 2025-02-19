@@ -25,9 +25,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cloudwego/configmanager/configvalue/items"
-
 	"github.com/cloudwego/configmanager/configvalue"
+	"github.com/cloudwego/configmanager/configvalue/items"
 	"github.com/cloudwego/configmanager/iface"
 	"github.com/cloudwego/configmanager/util"
 )

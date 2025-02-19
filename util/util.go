@@ -19,6 +19,7 @@ import (
 	"sync/atomic"
 
 	"github.com/bytedance/sonic"
+
 	"github.com/cloudwego/configmanager/iface"
 )
 
